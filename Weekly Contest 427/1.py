@@ -1,10 +1,5 @@
 class Solution:
     def constructTransformedArray(self, nums: list[int]) -> list[int]:
-        """
-        Function takes a list as an input (array) and returns another list as an ouput (array).
-        Read the problem statement and let me know more about what is needed.
-        """
-        # Write code to transform array here:
         result = []
         copy = nums * 3
         for i in range(len(nums)):
