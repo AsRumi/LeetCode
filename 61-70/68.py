@@ -4,6 +4,8 @@
 Given the head of a singly linked list, reverse the list, and return the reversed list.
 """
 
+from typing import Optional
+
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
@@ -29,6 +31,15 @@ class Solution:
         print(current.val)
         return head
     
+    def reverseLinkedListOptimal(self, head: Optional[ListNode]) -> ListNode:
+        prev, temp, current = None, ListNode(), head
+        while current:
+            temp = current.next
+            current.next = prev
+            prev = current
+            current = temp
+        return prev
+    
     def reverseList(self, head):
         head = self.createList(head)
         # head = self.printList(head)
@@ -53,5 +64,6 @@ class Solution:
         return two
     
 answer = Solution()
-reversed_list = answer.reverseList(head = [1, 2, 3, 4, 5])
-print(f"Reversed List: {reversed_list}")
+head = answer.createList(list = [1, 2, 3, 4, 5])
+head = answer.reverseLinkedListOptimal(head = head)
+print(f"Reversed Linked List: {answer.printList(head)}")
