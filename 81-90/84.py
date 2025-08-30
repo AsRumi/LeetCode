@@ -7,19 +7,20 @@ class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         res, sol = [], []
         state = nums.copy()
-        def backtrack(i):
+        def backtrack():
+            i = 0
             while i < len(state):
                 temp = state[i]
                 sol.append(state[i])
                 state.pop(i)
-                backtrack(i)
+                backtrack()
                 state.insert(i, temp)
                 sol.pop()
                 i += 1
             if len(sol) == len(nums):
                 res.append(sol[:])
                 return
-        backtrack(0)
+        backtrack()
         return res
     
 ans = Solution()
