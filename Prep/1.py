@@ -16,5 +16,4 @@
 #     myPrinter.setMessage(None)
 #     myPrinter.printMe()
 # except ValueError:
-#     print("A value error occured!")
-
+#     print("A value error occurred!")
