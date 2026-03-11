@@ -14,7 +14,25 @@ class Node:
 class Solution:
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
         
-        return None
+        def clone_node(node: Node, clone: Node):
+            for neighbor in node.neighbors:
+                if neighbor.val not in cloned_hashmap.keys():
+                    cloned_neighbor = Node(neighbor.val)
+                    clone.neighbors.append(cloned_neighbor)
+                    cloned_hashmap[cloned_neighbor.val] = cloned_neighbor
+                    clone_node(neighbor, cloned_neighbor)
+                else:
+                    clone.neighbors.append(cloned_hashmap[neighbor.val])
+        
+        if node is None:
+            return None
+        
+        cloned_hashmap = {}
+        cloned_first = Node(node.val)
+        
+        cloned_hashmap[cloned_first.val] = cloned_first
+        clone_node(node, cloned_first)
+        return cloned_first
     
 answer = Solution()
 cloneGraph = answer.cloneGraph()
