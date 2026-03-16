@@ -8,29 +8,22 @@ class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
         newStart, newEnd = newInterval
         newIntervalList = []
-        setMin, setMax = 0, None
         i = 0
-        while i < len(intervals):
-            start, end = intervals[i]
-            if end < newStart:
-                newIntervalList.append([start, end])
-            else:
-                break
+        
+        while i < len(intervals) and intervals[i][1] < newStart:
+            newIntervalList.append(intervals[i])
             i += 1
-        start, end = intervals[i]
-        setMin = min(start, newStart)
-        print(f"Set Min calculated as: {setMin}\ni is {i}\nstart is {start}")
-        while i < len(intervals) and newEnd > start:
-            start, _ = intervals[i]
+        
+        while i < len(intervals) and intervals[i][0] <= newEnd:
+            newStart = min(newStart, intervals[i][0])
+            newEnd = max(newEnd, intervals[i][1])
             i += 1
-        i = i - 2
-        _, end = intervals[i]
-        setMax = max(end, newEnd)
-        newIntervalList.append([setMin, setMax])
-        i += 1
+        newIntervalList.append([newStart, newEnd])
+        
         while i < len(intervals):
             newIntervalList.append(intervals[i])
             i += 1
+        
         return newIntervalList
     
 answer = Solution()
