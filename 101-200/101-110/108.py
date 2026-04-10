@@ -7,13 +7,15 @@ from typing import List
 class Solution:
     def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
         sum_d = 0
-        starting_index, max_difference = -1, -1
+        starting_index = 0
+        gas_level = 0
         for i in range(len(gas)):
             difference = gas[i] - cost[i]
             sum_d += difference
-            if difference >= 0 and difference > max_difference:
-                starting_index = i
-                max_difference = difference
+            gas_level += difference
+            if gas_level < 0:
+                gas_level = 0
+                starting_index = i + 1
         return starting_index if sum_d >= 0 else -1
     
 answer = Solution()
