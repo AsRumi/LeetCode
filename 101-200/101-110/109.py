@@ -17,12 +17,13 @@ class Solution:
             hand_list.append([key, value])
         
         hand_list.sort()
-        
+        print(hand_list)
         while len(hand_list):
             i = 0
             popped = 0
             last_inserted = None
-            while i < groupSize:
+            elements = 0
+            while elements < groupSize:
                 if i == 0:
                     hand_list[i][1] -= 1
                     last_inserted = hand_list[i][0]
@@ -30,13 +31,18 @@ class Solution:
                         hand_list.pop(i)
                         popped += 1
                 else:
-                    if len(hand_list) == 0 or hand_list[i][0] - last_inserted != 1 or i > len(hand_list):
+                    if (i > len(hand_list) and i < groupSize) or hand_list[i][0] - last_inserted != 1:
                         return False
                     else:
-                        
+                        hand_list[i][1] -= 1
+                        last_inserted = hand_list[i][0]
+                        if hand_list[i][1] == 0:
+                            hand_list.pop(i)
+                            popped += 1
                 i += 1 - popped
+                elements += 1
         
-        return False
+        return True
     
 answer = Solution()
 isNStraightHand = answer.isNStraightHand(hand = [1,3,6,2,2,3,4,7,8], groupSize = 3)
