@@ -29,6 +29,6 @@ class Solution:
             fast = fast.next
             slow = slow.next
 
-        slow.next = slow.next.next
+        slow.next = slow.next.next # perform the removal
 
         return dummy.next
